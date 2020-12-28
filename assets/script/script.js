@@ -19,15 +19,7 @@ $(document).ready(function() {
         // console.log($(element).next());
         //comparing time1 and time2 to apply color code
         // console.log($(element).text());
-        console.log("time1:"+time1+"-time2:"+time2);
-        // if (time1.isBefore(time2)){
-        //     console.log("time1 before time2");
-        // } else if (time2.isBefore(time1)){
-        //     console.log("time1 after time2");
-        // } else {
-        //     console.log("time1 = time2");
-        // };
-
+        // console.log("time1:"+time1+"-time2:"+time2);
         if (time1 === time2) {
             // present hour display in red
             // $(element).next().addClass("present");

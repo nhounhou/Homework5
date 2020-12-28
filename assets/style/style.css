@@ -99,3 +99,7 @@ body {
   .myForm {
     display: none;
   }
+
+  #txtArea {
+    border: 1px solid grey;
+  }
