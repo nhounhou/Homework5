@@ -60,7 +60,7 @@ body {
   }
   
   .saveBtn {
-    border-left: 1px solid black;
+    /* border-left: 1px solid black; */
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
     background-color: #06AED5;
@@ -81,7 +81,7 @@ body {
   }
 
   .select {
-    background: rgb(30, 135, 177);
+    background:  #06AED5;
   }
 
   p {

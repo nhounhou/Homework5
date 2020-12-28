@@ -6,28 +6,45 @@ $(document).ready(function() {
         //CallBack function to set the color in the scheduler page
 
         //getting hour from the scheduler page => time1
-        var time1=moment($(element).text(),"h A");
+        var hourArray=["9:00:00","10:00:00","11:00:00","12:00:00","13:00:00","14:00:00","15:00:00","16:00:00","17:00:00","18:00:00"]
+        var time1=moment(hourArray[index],"hh:mm:ss").format("HH");
+        // console.log("array:"+hourArray[index]);
+        // console.log(time1);
         //getting current time hour => time2
-        var time2=moment().format("h A");
+        var time2=moment().format("HH");
 
         // building the array of hours for the comboBox
         hours.push($(element).text());
 
         // console.log($(element).next());
         //comparing time1 and time2 to apply color code
+        // console.log($(element).text());
+        console.log("time1:"+time1+"-time2:"+time2);
+        // if (time1.isBefore(time2)){
+        //     console.log("time1 before time2");
+        // } else if (time2.isBefore(time1)){
+        //     console.log("time1 after time2");
+        // } else {
+        //     console.log("time1 = time2");
+        // };
+
         if (time1 === time2) {
             // present hour display in red
             // $(element).next().addClass("present");
+            console.log("present");
             $(element).next().attr("style","background-color: #ff6961;");
         } else if (time1 < time2) {
             // past hour display in grey
             // $(element).next().addClass("past");
+            console.log("past");
             $(element).next().attr("style","background-color:  #d3d3d3;");
         } else {
             // future hour display in green
             // $(element).next().addClass("future");
+            console.log("future");
             $(element).next().attr("style","background-color: #77dd77;");
         };
+
         $(element).next().attr("data-value",$(element).text());
         
         // load the data from the localStorage into the scheduler
