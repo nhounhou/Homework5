@@ -2,17 +2,31 @@ $(document).ready(function() {
     $("#currentDay").text(moment().format("dddd MMMM  Do YYYY"));
     
     var hours=[];
+    var hourArray=[];
+
     $(".hour").each(function(index,element){
         //CallBack function to set the color in the scheduler page
 
         //getting hour from the scheduler page => time1
-        var hourArray=["9:00:00","10:00:00","11:00:00","12:00:00","13:00:00","14:00:00","15:00:00","16:00:00","17:00:00","18:00:00"]
+        var space=$(element).text().indexOf(" ");
+        var hourString=$(element).text().slice(0,space);
+        var hourSpan=$(element).text().slice(space+1,$(element).text().length);
+        // console.log(hourSpan);
+        if (hourSpan==="AM") {
+            hourString=hourString+":00:00";
+        } else if (hourString==="12") {
+            hourString=hourString+":00:00";
+        } else {
+            var convHour=parseInt(hourString)+12;
+            hourString=convHour.toString()+":00:00";
+        };
+        hourArray.push(hourString);
+        // console.log(hourArray);
         var time1=moment(hourArray[index],"hh:mm:ss").format("HH");
-        // console.log("array:"+hourArray[index]);
-        // console.log(time1);
+
         //getting current time hour => time2
         var time2=moment().format("HH");
-
+        // console.log("time2:"+time2);
         // building the array of hours for the comboBox
         hours.push($(element).text());
 
@@ -22,19 +36,25 @@ $(document).ready(function() {
         // console.log("time1:"+time1+"-time2:"+time2);
         if (time1 === time2) {
             // present hour display in red
-            // $(element).next().addClass("present");
-            console.log("present");
-            $(element).next().attr("style","background-color: #ff6961;");
+            $(element).next().addClass("present");
+            $(element).next().removeClass("past");
+            $(element).next().removeClass("future");
+            // console.log("present");
+            // $(element).next().attr("style","background-color: #ff6961;");
         } else if (time1 < time2) {
             // past hour display in grey
-            // $(element).next().addClass("past");
-            console.log("past");
-            $(element).next().attr("style","background-color:  #d3d3d3;");
+            $(element).next().addClass("past");
+            $(element).next().removeClass("present");
+            $(element).next().removeClass("future");
+            // console.log("past");
+            // $(element).next().attr("style","background-color:  #d3d3d3;");
         } else {
             // future hour display in green
-            // $(element).next().addClass("future");
-            console.log("future");
-            $(element).next().attr("style","background-color: #77dd77;");
+            $(element).next().addClass("future");
+            $(element).next().removeClass("past");
+            $(element).next().removeClass("present");
+            // console.log("future");
+            // $(element).next().attr("style","background-color: #77dd77;");
         };
 
         $(element).next().attr("data-value",$(element).text());
@@ -51,12 +71,51 @@ $(document).ready(function() {
     });
 
     // managing form to input task
+    // creating the list of hour for the combobox
     for (i=0;i<hours.length;i++){
         var optTag=$("<option>");
         optTag.text(hours[i]);
         optTag.attr("value",hours[i]);
         $("#comboBoxHour").append(optTag);
     };
+
+    $("#comboBoxHour").change(function(){
+        var textValue=localStorage.getItem($("#comboBoxHour").val());
+        console.log($("#comboBoxHour").val()+"-"+textValue);
+        $("#txtTask").val(textValue);
+    });
+
+    // click on Submit button from the Event FORM
+    $("#btnSubmit").click(function(){
+        console.log("submitted");
+        // hide the form
+        $(".myForm").attr("style","display: none;");
+
+        // update the scheduler
+        // console.log($("#comboBoxHour").val());
+        // console.log($("#txtTask").val());
+        // get the hour seelcted and the Task event
+        var cmbValue=$("#comboBoxHour").val();
+        var txtTask=$("#txtTask").val();
+        var selectHour=$(".hour");
+
+        // console.log("selected "+selectHour);
+        // get all hours from the scheduler
+        selectHour.each(function(i,item){
+            // get the hour that was selected in the FORM and update the textArea element
+            if ($(item).text() === cmbValue){
+                $(item).next().children().val(txtTask);
+            };
+        });
+
+        // save in the localStorage
+        localStorage.setItem(cmbValue,txtTask);
+    });
+
+    $("#btnCancel").click(function(){
+        // hide the form
+        $(".myForm").attr("style","display: none;");        
+    });
 
     $("i").click(function(){
         // get click on the lock icon to make the textarea readonly
@@ -82,32 +141,97 @@ $(document).ready(function() {
         localStorage.setItem(slData.key,slData.text);
     });
 
+    // click on the setting Button to add or delete hours from the scheduler
+    $(".fa-users-cog").click(function(){
+        // console.log("first hour:"+moment(hourArray[0],"hh:mm:ss").format("h A"));
+        // console.log("last  hour:"+moment(hourArray[hourArray.length-1],"hh:mm:ss").format("h A"));
+        $("#firstHour").text(moment(hourArray[0],"hh:mm:ss").format("h A"));
+        $("#lastHour").text(moment(hourArray[hourArray.length-1],"hh:mm:ss").format("h A"));
+        $("#mySetting").attr("style","display: block;");
+    });
+
+    // click on Add Event icone to display FORM
     $(".fa-calendar-plus").click(function(){
         $(".myForm").attr("style","display: block;");
+        var textValue=localStorage.getItem($("#comboBoxHour").val());
+        console.log($("#comboBoxHour").val()+"-"+textValue);
+        $("#txtTask").val(textValue);
     });
 
-    $("#btnSubmit").click(function(){
-        console.log("submitted");
-        // hide the form
-        $(".myForm").attr("style","display: none;");
+    var rowTag=$(".row");
+    // adding dynamically one row in the Scheduler
+    function addRow(type,hourName){
+        console.log("add row "+type+"-"+hourName);
 
-        // update the scheduler
-        // console.log($("#comboBoxHour").val());
-        // console.log($("#txtTask").val());
-        var cmbValue=$("#comboBoxHour").val();
-        var txtTask=$("#txtTask").val();
-        var selectHour=$(".hour");
+        var divTag=$("<div>");
+        divTag.addClass("col-md-1 border rounded select");
+        var pTag=$("<p>");
+        var iTag=$("<i>");
+        iTag.addClass("fas fa-lock saveBtn");
+        pTag.append(iTag);
+        divTag.append(pTag);
+        if (type==="A") {
+            console.log("append");
+            rowTag.append(divTag);
+        } else {
+            console.log("prepend");
+            rowTag.prepend(divTag);
+        }
 
-        // console.log("selected "+selectHour);
-        // get all hours from the scheduler
-        selectHour.each(function(i,item){
-            // get the hour that was selected in the FORM and update the textArea element
-            if ($(item).text() === cmbValue){
-                $(item).next().children().val(txtTask);
+        var divTag=$("<div>");
+        divTag.addClass("col-md-10 border task");
+        var textAreaTag=$("<textarea>");
+        textAreaTag.addClass("description")
+        divTag.append(textAreaTag);
+        if (type==="A") {
+            console.log("append");
+            rowTag.append(divTag);
+        } else {
+            console.log("prepend");
+            rowTag.prepend(divTag);
+        }
+
+        var divTag=$("<div>");
+        divTag.addClass("col-md-1 hour");
+        divTag.text(hourName);
+        if (type==="A") {
+            console.log("append");
+            rowTag.append(divTag);
+        } else {
+            console.log("prepend");
+            rowTag.prepend(divTag);
+        }
+        $("#mySetting").attr("style","display: none;");
+    };
+
+    function removeRow(index) {
+        $(".hour").each(function(i,item){
+            if (i===index) {
+                console.log("removing element "+$(item).text());
+                console.log("index "+i+"-"+index);
             };
         });
+        $("#mySetting").attr("style","display: none;");
+    };
 
-        // save in the localStorage
-        localStorage.setItem(cmbValue,txtTask);
+    // Add/Remove hours event click
+    
+    // console.log("before Click Event");
+    $("#beforePlus").click(function(){
+        addRow("B",hourArray[0]);
     });
+    
+    $("#beforeMinus").click(function(){
+        removeRow(0);
+    });
+        
+    $("#afterPlus").click(function(){
+        addRow("A",hourArray[hourArray.length-1]);
+    });
+        
+    $("#afterMinus").click(function(){
+        removeRow(hourArray.length-1);
+    });
+    // console.log("after Click Event");
+
 });

@@ -38,6 +38,14 @@ body {
     border-top: 1px solid white;;
   }
   
+  /* .row {
+    margin: 130px;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+  } */
+
   .hour {
     background-color: #ffffff;
     color: #000000;
@@ -72,13 +80,13 @@ body {
     transition: all .3s ease-in-out;
   }
 
-  .hour, .task, .select {
+  /* .hour, .task, .select {
       height: 100px;
-  }
-  .task {
+  }*/
+  /* .task { 
     background: grey;
     margin-top: 0px;
-  }
+  } */
 
   .select {
     background:  #06AED5;
@@ -102,4 +110,12 @@ body {
 
   #txtArea {
     border: 1px solid grey;
+  }
+
+  .container {
+    position: relative;
+  }
+
+  #mySetting {
+    display: none;
   }
