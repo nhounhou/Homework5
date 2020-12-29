@@ -117,6 +117,11 @@ $(document).ready(function() {
         $(".myForm").attr("style","display: none;");        
     });
 
+    $("#btnReset").click(function(){
+        // hide the form
+        $("#mySetting").attr("style","display: none;");        
+    });
+
     $("i").click(function(){
         // get click on the lock icon to make the textarea readonly
 
@@ -159,10 +164,33 @@ $(document).ready(function() {
     });
 
     var rowTag=$(".row");
-    // adding dynamically one row in the Scheduler
-    function addRow(type,hourName){
-        console.log("add row "+type+"-"+hourName);
 
+    // adding dynamically one row a the top of the Scheduler
+    function addBeforeRow(hourName){
+        console.log("add row "+hourName);
+
+        var nowTime=moment().format("HH");
+        var hourString=moment(hourName,"hh:mm:ss").format("HH");
+        var intHour=parseInt(hourString);
+
+        if (intHour>=1) {
+            intHour--;
+        } else {
+            intHour=0;
+        };
+
+        if (intHour>12) {
+            intHour=intHour-12
+            hourString=intHour.toString();
+            hourString=hourString+" PM";
+        } else {
+            hourString=intHour.toString();
+            hourString=hourString+" AM";
+        };
+
+        hourArray.unshift(intHour.toString()+":00:00");
+
+        // CREATING THE <DIV> for the lock icon
         var divTag=$("<div>");
         divTag.addClass("col-md-1 border rounded select");
         var pTag=$("<p>");
@@ -170,37 +198,30 @@ $(document).ready(function() {
         iTag.addClass("fas fa-lock saveBtn");
         pTag.append(iTag);
         divTag.append(pTag);
-        if (type==="A") {
-            console.log("append");
-            rowTag.append(divTag);
-        } else {
-            console.log("prepend");
-            rowTag.prepend(divTag);
-        }
+        rowTag.prepend(divTag);
 
+        // Creating the <div> for the Task Event column
         var divTag=$("<div>");
-        divTag.addClass("col-md-10 border task");
+        // divTag.addClass("col-md-10 border task");
+        if (intHour>nowTime) {
+            divTag.addClass("col-md-10 border task future");
+        } else if (intHour<nowTime) {
+            divTag.addClass("col-md-10 border task past");
+        } else {
+            divTag.addClass("col-md-10 border task present");
+        };
+        divTag.attr("data-value",hourString);
         var textAreaTag=$("<textarea>");
         textAreaTag.addClass("description")
         divTag.append(textAreaTag);
-        if (type==="A") {
-            console.log("append");
-            rowTag.append(divTag);
-        } else {
-            console.log("prepend");
-            rowTag.prepend(divTag);
-        }
+        rowTag.prepend(divTag);
 
+        // Creating the <div> for the hour 
         var divTag=$("<div>");
         divTag.addClass("col-md-1 hour");
-        divTag.text(hourName);
-        if (type==="A") {
-            console.log("append");
-            rowTag.append(divTag);
-        } else {
-            console.log("prepend");
-            rowTag.prepend(divTag);
-        }
+        divTag.text(hourString);
+        rowTag.prepend(divTag);
+
         $("#mySetting").attr("style","display: none;");
     };
 
@@ -218,7 +239,7 @@ $(document).ready(function() {
     
     // console.log("before Click Event");
     $("#beforePlus").click(function(){
-        addRow("B",hourArray[0]);
+        addBeforeRow(hourArray[0]);
     });
     
     $("#beforeMinus").click(function(){
@@ -226,7 +247,7 @@ $(document).ready(function() {
     });
         
     $("#afterPlus").click(function(){
-        addRow("A",hourArray[hourArray.length-1]);
+        addAfterRow(hourArray[hourArray.length-1]);
     });
         
     $("#afterMinus").click(function(){

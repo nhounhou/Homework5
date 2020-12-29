@@ -119,3 +119,11 @@ body {
   #mySetting {
     display: none;
   }
+
+  #btnReset {
+    font-size: 20px;
+  }
+
+  #settingIcon {
+    display: none;
+  }

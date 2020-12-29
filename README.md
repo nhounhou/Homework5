@@ -8,6 +8,9 @@ Third-Party APIs: Work Day Scheduler
 - [Links](#links)
 - [Tool Page](#tool-page)
 - [Improvements](#improvements)
+    - [Form Task](#form-task)
+    - [Form Setting](#form-setting)
+- [Credits](#credits)
 
 
 # Homework Presentation
@@ -44,8 +47,36 @@ All others files are in the **ASSETS** folder which contains a folder for each t
 ![tool](/assets/images/Tool-Page.jpg)
 
 # Improvements
+## Form Task
 I added a `form` that is hidden at the start of the scheduler.
 It become visible after clicking on the add event  ![calendar plus](/assets/images/calendar-plus.jpg).
+
 Where you can choose directly the hour and put in the event to be logged in.
+And when an hour is selected, the task already saved will be displayed in the textArea of the form.
+
 Once the `submit` button is clicked, it works as if the lock `button` has been clicked.
 ![Event Form](/assets/images/Event-Form.jpg)
+
+## Form Setting
+By clicking on this icon,
+![Setting Icon](/assets/images/setting-icone.jpg), the Setting Form will be displayed.
+
+![Setting Form](/assets/images/setting-form.jpg)
+
+This will add/remove dynamically hour at the start or the end of the current day.
+
+Though, this idea was abandonned because the add/removed hour were not kept when the webpage is refreshed.
+Keeping it, will mean that the logic of the tool would have to be redone.
+By creating the body of the tool base on the data saved on the `localStorage` of the browser. Which mean also that at the first start there would be no data displayed.
+
+I left the code of the form in the `script.js` file if I was to come back to finish that part. As well as the code in the `index.html` and `style.css` files.
+
+The first function `addBeforeRow` has been coded, which add the entire row at the top of the schedule.
+The other 2 functions `addAfterRow` and `removeRow` haven't been coded yet.
+The `addAfterRow` function is the same as the `addBeforeRow` function, except that it will use the `.append()` instead of the `.prepend()` and also the sequence of adding each `<div>` element is reverse.
+
+# Credits
+- [JavaScript Date and Time Library](https://momentjs.com/)
+- [BootStrap](https://getbootstrap.com/)
+- [FontAwesome for the icons](https://fontawesome.com)
+- [JQuery v3.2.1](https://jquery.org)
