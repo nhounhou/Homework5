@@ -40,9 +40,9 @@ All others files are in the **ASSETS** folder which contains a folder for each t
 - Images: screen shot
 
 # Links
-[Repository Folder](https://github.com/nhounhou/WorkDayScheduler/settings)
+[Repository Folder](https://github.com/nhounhou/WorkDayScheduler)
 
-[Daily Scheduler](https://nhounhou.github.io/WorkDayScheduler/)
+[Daily Scheduler](https://nhounhou.github.io/WorkDayScheduler)
 
 # Tool Page
 ![tool](/assets/images/Tool-Page.jpg)
