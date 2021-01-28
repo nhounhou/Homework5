@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./assets/style/style.css"/>
+    <title>Work Day Scheduler</title>
+  </head>
+
+  <body>
+    <header class="jumbotron">
+      <h1 class="display-3">Work Day Scheduler</h1>
+      <p class="lead">A simple calendar app for scheduling your work day</p>
+      <p id="currentDay" class="lead"></p>
+      <p class="fas fa-calendar-plus"></p>
+      <p id="settingIcon" class="fas fa-users-cog float-right"></p>      
+    </header>
+    <div class="container">
+      <div class="myForm">
+        <label for="comboBoxHour">Select hour</label>
+        <br/>
+        <select id="comboBoxHour" name="hours"></select>
+        <br/>
+        <label for="textHour">Input your task</label>
+        <br/>
+        <textarea id="txtTask"></textarea>
+        <input id="btnSubmit" type="submit" value="Submit">
+        <input id="btnCancel" type="reset" value="Cancel">
+        <p></p>
+      </div>  
+      <div id="mySetting">
+        <p id="beforePlus" class="fas fa-plus-square"></p>
+        <p id="beforeMinus" class="fas fa-minus-square"></p>
+        <br/>
+        <label for="firstHour">Start Hour: </label>
+        <label id="firstHour"></label>
+        <br/>
+        <label for="lastHour">End   Hour: </label>
+        <label id="lastHour"></label>
+        <br/>
+        <p id="afterPlus" class="far fa-plus-square"></p>
+        <p id="afterMinus" class="far fa-minus-square"></p>
+        <br/>
+        <input id="btnReset" type="reset" value="Cancel">
+      </div>
+      <!-- Timeblocks go here -->
+      <div class="row">
+          <div class="col-md-1 hour">9 AM</div>
+          <div class="col-md-10 border task">
+              <textarea class="description"></textarea>
+          </div>
+          <div class="col-md-1 border rounded select">
+              <p><i class="fas fa-lock saveBtn"></i></p>
+          </div>
+          <div class="col-md-1 hour">10 AM</div>
+          <div class="col-md-10 border task">
+              <textarea class="description"></textarea>
+          </div>
+          <div class="col-md-1 border rounded select">
+            <p><i class="fas fa-lock saveBtn"></i></p>
+          </div>
+          <div class="col-md-1 hour">11 AM</div>
+          <div class="col-md-10 border task">
+              <textarea class="description"></textarea>
+          </div>
+          <div class="col-md-1 border rounded select">
+            <p><i class="fas fa-lock saveBtn"></i></p>
+          </div>
+          <div class="col-md-1 hour">12 PM</div>
+          <div class="col-md-10 border task">
+              <textarea class="description"></textarea>
+          </div>
+          <div class="col-md-1 border rounded select">
+            <p><i class="fas fa-lock saveBtn"></i></p>
+          </div>
+          <div class="col-md-1 hour">1 PM</div>
+          <div class="col-md-10 border task">
+              <textarea class="description"></textarea>
+          </div>
+          <div class="col-md-1 border rounded select">
+            <p><i class="fas fa-lock saveBtn"></i></p>
+          </div>
+          <div class="col-md-1 hour">2 PM</div>
+          <div class="col-md-10 border task">
+              <textarea class="description"></textarea>
+          </div>
+          <div class="col-md-1 border rounded select">
+            <p><i class="fas fa-lock saveBtn"></i></p>
+          </div>
+          <div class="col-md-1 hour">3 PM</div>
+          <div class="col-md-10 border task">
+              <textarea class="description"></textarea>
+          </div>
+          <div class="col-md-1 border rounded select">
+            <p><i class="fas fa-lock saveBtn"></i></p>
+          </div>
+          <div class="col-md-1 hour">4 PM</div>
+          <div class="col-md-10 border task">
+              <textarea class="description"></textarea>
+          </div>
+          <div class="col-md-1 border rounded select">
+            <p><i class="fas fa-lock saveBtn"></i></p>
+          </div>
+          <div class="col-md-1 hour">5 PM</div>
+          <div class="col-md-10 border task">
+              <textarea class="description"></textarea>
+          </div>
+          <div class="col-md-1 border rounded select">
+            <p><i class="fas fa-lock saveBtn"></i></p>
+          </div>
+          <div class="col-md-1 hour">6 PM</div>
+          <div class="col-md-10 border task">
+              <textarea class="description"></textarea>
+          </div>
+          <div class="col-md-1 border rounded select">
+            <p><i class="fas fa-lock saveBtn"></i></p>
+          </div>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="./assets/script/script.js"></script>
+  </body>
+</html>

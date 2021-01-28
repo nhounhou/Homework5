@@ -10,6 +10,7 @@ Third-Party APIs: Work Day Scheduler
 - [Improvements](#improvements)
     - [Form Task](#form-task)
     - [Form Setting](#form-setting)
+    - [Dynamic Setting](#dynamic-setting)
 - [Credits](#credits)
 
 
@@ -39,9 +40,9 @@ All others files are in the **ASSETS** folder which contains a folder for each t
 - Images: screen shot
 
 # Links
-[Repository Folder](https://github.com/nhounhou/Homework5)
+[Repository Folder](https://github.com/nhounhou/WorkDayScheduler/settings)
 
-[Daily Scheduler](https://nhounhou.github.io/Homework5)
+[Daily Scheduler](https://nhounhou.github.io/WorkDayScheduler/)
 
 # Tool Page
 ![tool](/assets/images/Tool-Page.jpg)
@@ -74,6 +75,14 @@ I left the code of the form in the `script.js` file if I was to come back to fin
 The first function `addBeforeRow` has been coded, which add the entire row at the top of the schedule.
 The other 2 functions `addAfterRow` and `removeRow` haven't been coded yet.
 The `addAfterRow` function is the same as the `addBeforeRow` function, except that it will use the `.append()` instead of the `.prepend()` and also the sequence of adding each `<div>` element is reverse.
+
+cf [next point](#dynamic-setting)
+
+## Dynamic Setting
+You will see 3 other files `indexDynamic.html`, `scriptDynamic.js` and `styleDynamic.css` in their respective folder.
+This the same Work Day Scheduler but with all the elements created dynamically with the JQuery commands. The only line that have been added to the `indexDynamic.html` file are the links to the Javascript file and the CSS file.
+
+In this version I did coded feature that add/remove hour from the scheduler dynamically.
 
 # Credits
 - [JavaScript Date and Time Library](https://momentjs.com/)
