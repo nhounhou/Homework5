@@ -76,6 +76,7 @@ The first function `addBeforeRow` has been coded, which add the entire row at th
 The other 2 functions `addAfterRow` and `removeRow` haven't been coded yet.
 The `addAfterRow` function is the same as the `addBeforeRow` function, except that it will use the `.append()` instead of the `.prepend()` and also the sequence of adding each `<div>` element is reverse.
 
+<<<<<<< HEAD
 cf [next point](#dynamic-setting)
 
 ## Dynamic Setting
@@ -83,6 +84,9 @@ You will see 3 other files `indexDynamic.html`, `scriptDynamic.js` and `styleDyn
 This the same Work Day Scheduler but with all the elements created dynamically with the JQuery commands. The only line that have been added to the `indexDynamic.html` file are the links to the Javascript file and the CSS file.
 
 In this version I did coded feature that add/remove hour from the scheduler dynamically.
+=======
+Another improvement would be to dynamically create the schedule rows. That way it would be easier to extend/reduce the work day hours and save them in the `localStorage`. The display function would have to be updated to be able to display the hours accordingly. If no data were to be present in the `localStorage` then the default hours would be 9AM until 6PM.
+>>>>>>> cf04e7e58e32a015bc362fd23b815dfffc5c4a0d
 
 # Credits
 - [JavaScript Date and Time Library](https://momentjs.com/)
